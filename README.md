@@ -1,6 +1,6 @@
 # Hermes MCP
 
-A lightweight, reliable MCP server for Claude Desktop with 14 essential development tools.
+A lightweight, reliable MCP server for Claude Desktop with 15 essential development tools.
 
 **Platform:** Windows (uses PowerShell, Git for Windows paths)  
 **Key feature:** Fixes the critical async subprocess stdin inheritance bug that causes tools to hang.
@@ -9,8 +9,8 @@ A lightweight, reliable MCP server for Claude Desktop with 14 essential developm
 
 Most MCP file/shell servers are flaky. Hermes is:
 - **Reliable** - Proper async subprocess handling with stdin isolation
-- **Complete** - 14 tools covering files, shell, git, and HTTP
-- **Simple** - Pure Python, ~600 lines, easy to understand and modify
+- **Complete** - 15 tools covering files, shell, git, HTTP, and system utilities
+- **Simple** - Pure Python, ~700 lines, easy to understand and modify
 - **Fast** - Direct execution, no unnecessary overhead
 
 ## Platform Support
@@ -43,7 +43,7 @@ process = await asyncio.create_subprocess_exec(
 
 Without `stdin=asyncio.subprocess.DEVNULL`, git and shell commands will hang indefinitely in Claude Desktop.
 
-## Tools (14)
+## Tools (15)
 
 ### File Operations (10)
 | Tool | Description |
@@ -70,6 +70,11 @@ Without `stdin=asyncio.subprocess.DEVNULL`, git and shell commands will hang ind
 |------|-------------|
 | `fetch_url` | Fetch webpage as text |
 | `http_request` | Full HTTP API calls |
+
+### System (1)
+| Tool | Description |
+|------|-------------|
+| `get_time` | Get current local date and time |
 
 ## Installation
 
@@ -145,6 +150,9 @@ hermes:http_request method="GET" url="https://api.github.com/zen"
 
 # POST with JSON
 hermes:http_request method="POST" url="https://api.example.com/data" json_body={"key": "value"}
+
+# Get current time
+hermes:get_time
 ```
 
 ## Security
