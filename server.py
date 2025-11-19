@@ -22,6 +22,9 @@ Web & API:
 13. fetch_url - Fetch webpage content as text
 14. http_request - Make HTTP API calls (GET/POST/PUT/DELETE)
 
+System:
+15. get_time - Get current local date and time
+
 Usage:
     python server.py
     
@@ -328,6 +331,15 @@ async def list_tools():
                     }
                 },
                 "required": ["method", "url"]
+            }
+        ),
+        Tool(
+            name="get_time",
+            description="Get current local date and time on the machine.",
+            inputSchema={
+                "type": "object",
+                "properties": {},
+                "required": []
             }
         )
     ]
@@ -863,6 +875,13 @@ Created: {created}"""
                 type="text",
                 text=f"Error making request: {e}"
             )]
+    
+    elif name == "get_time":
+        now = datetime.now()
+        return [TextContent(
+            type="text",
+            text=f"{now.strftime('%A, %d %B %Y, %I:%M %p')} ({now.strftime('%Y-%m-%d %H:%M:%S')})"
+        )]
     
     else:
         return [TextContent(
